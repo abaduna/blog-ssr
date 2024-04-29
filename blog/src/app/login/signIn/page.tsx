@@ -7,10 +7,19 @@ export interface UserProps  {
     user:string
     password:string
 }
-function loginPost(user:UserProps) {
-    const res = await fetch(`http://localhost:3001/api/login/`)
-    const data = await res.json()
-    return data
+async function loginPost(user:UserProps) {
+  const rest = await fetch("http://localhost:3001/api/login/", {
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify(user),
+  });
+
+  const data = await rest.json();
+  return data;
 }
 function Page() {
   const [user,setUser]= useState<string>("")
@@ -18,21 +27,22 @@ function Page() {
 
     const handlerLogin =async (e: FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
-        const data = {
-          name:user,
+        const data:UserProps = {
+          user:user,
           password
         }
         try {
-         const token = await 
+         const token = await loginPost(data)
+         console.log(token);
+         
          if (token) {
-          console.log(token.data.token);
+          console.log(token);
           
-          localStorage.setItem("token", token.data.token);
+          localStorage.setItem("token", token.token);
         } else {
           console.log('El token es indefinido.');
         }
-          // localStorage.setItem("token",token)
-          
+         
         } catch (error) {
           console.log(error);
           

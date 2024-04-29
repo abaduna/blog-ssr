@@ -1,4 +1,6 @@
-
+import { useEffect } from "react";
+import jwt_decode from 'jwt-decode';
+import BtnDeletd from "@/app/component/Modificar/btnDeletd";
 
 interface paramsProps {
     params: {
@@ -29,6 +31,7 @@ const Page = async({params}:paramsProps) => {
       <div key={blog.id}>
         <p>{blog.title}</p>
         <p>{blog.blog}</p>
+        <BtnDeletd/>
       </div>
     ))}
     </ >
