@@ -27,8 +27,32 @@ routerUser.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const hashedPassword = yield bcrypt_1.default.hash(passwordToString, salt);
         console.log(`hashedPassword ${hashedPassword}`);
         const user = yield connection.query('SELECT * FROM usuarios WHERE name = ? AND hashPassword = ? ;', [name, hashedPassword]);
-        jsonwebtoken_1.default.sign({ user: user }, 'abaduna', (err, token) => {
+        if (!user) {
+            res.status(404).json({ message: "usuario no enontrado" });
+        }
+        jsonwebtoken_1.default.sign({ user: name, id: 1 }, 'abaduna', (err, token) => {
             res.json({ token: token });
+            console.log(err);
+        });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: error });
+    }
+}));
+routerUser.post('/created', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const connection = yield (0, db_1.getConnection)();
+    const { name, password } = req.body;
+    try {
+        const saltRounds = 10;
+        const salt = yield bcrypt_1.default.genSalt(saltRounds);
+        const passwordToString = password;
+        const hashedPassword = yield bcrypt_1.default.hash(passwordToString, salt);
+        console.log(`hashedPassword ${hashedPassword}`);
+        const user = yield connection.query('INSERT INTO usuarios (name,hashPassword) values (?,?);', [name, hashedPassword]);
+        jsonwebtoken_1.default.sign({ user: name, id: 1 }, 'abaduna', (err, token) => {
+            res.json({ token: token });
+            console.log(err);
         });
     }
     catch (error) {

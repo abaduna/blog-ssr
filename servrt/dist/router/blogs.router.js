@@ -43,5 +43,42 @@ routerBlog.post("/usuario/:user", (req, res) => __awaiter(void 0, void 0, void 0
         res.status(500).json({ error: error });
     }
 }));
+routerBlog.delete("/blog/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const conection = yield (0, db_1.getConnection)();
+    try {
+        yield conection.query("DELETE FROM blogs where id=?;", [id]);
+        return res.status(200).json({ message: "elimionado" });
+    }
+    catch (error) {
+        console.log(`error en la consulta`, error);
+        res.status(500).json({ error: error });
+    }
+}));
+routerBlog.get("/blog/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const conection = yield (0, db_1.getConnection)();
+    try {
+        const result = yield conection.query("SELECT *FROM blogs where id=?;", [id]);
+        return res.status(200).json(result);
+    }
+    catch (error) {
+        console.log(`error en la consulta`, error);
+        res.status(500).json({ error: error });
+    }
+}));
+routerBlog.patch("/blog/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const { blog, title } = req.body;
+    const conection = yield (0, db_1.getConnection)();
+    try {
+        const result = yield conection.query("UPDATE blogs SET blog = ? , title = ? where id = ?;", [blog, title, id]);
+        return res.status(200).json(result);
+    }
+    catch (error) {
+        console.log(`error en la consulta`, error);
+        res.status(500).json({ error: error });
+    }
+}));
 exports.default = routerBlog;
 //# sourceMappingURL=blogs.router.js.map

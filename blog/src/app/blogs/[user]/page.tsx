@@ -1,6 +1,7 @@
-import { useEffect } from "react";
-import jwt_decode from 'jwt-decode';
-import BtnDeletd from "@/app/component/Modificar/btnDeletd";
+
+import UpdateSPA from "@/component/Modificar/updateSPA";
+
+import styles from "./list.module.css"
 
 interface paramsProps {
     params: {
@@ -21,20 +22,24 @@ async function getBlogs (user:string) {
     return data
 }
 const Page = async({params}:paramsProps) => {
+
   const data:blogProps[] = await getBlogs(params.user)
   console.log(data);
   
   return (
-    < >
-    <h1>Bienvenido al Blog de {params.user}</h1>
-    {data.map((blog)=>(
-      <div key={blog.id}>
-        <p>{blog.title}</p>
-        <p>{blog.blog}</p>
-        <BtnDeletd/>
-      </div>
-    ))}
-    </ >
+    <div className={styles.container}>
+    <h1 className={styles.header}>Bienvenido al Blog de {params.user}</h1>
+    <div className={styles.bloglist}>
+      {data.map((blog) => (
+        <div key={blog.id} className={styles.blogitem}>
+          <p className={styles.blogtitle}>{blog.title}</p>
+          <p className={styles.blogcontent}>{blog.blog}</p>
+          
+          <UpdateSPA propetario={params.user} id={blog.id}/>
+        </div>
+      ))}
+    </div>
+  </div>
   )
 }
 
