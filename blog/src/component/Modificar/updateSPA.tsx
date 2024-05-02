@@ -4,9 +4,11 @@ import Link from "next/link";
 import style from "./update.module.css"
 import React, { useEffect, useState } from "react";
 import { resultProps } from "@/app/blogs/[user]/admin/blog/[id]/page";
+import { revalidatePath } from "next/cache";
 interface btnDeletd {
   propetario: string;
   id:string |undefined
+
 }
 
 const UpdateSPA = ({ propetario,id }: btnDeletd) => {
@@ -24,21 +26,11 @@ const UpdateSPA = ({ propetario,id }: btnDeletd) => {
       }
     }
   }, []);
-  const DeletedBlog =()=>{
-    fetch(`http://localhost:3001/api/blogs/blog/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    )
-  }
+  
   return <>
   <div className={style.container}>
-    {  isAdming ? <button onClick={DeletedBlog} className={style.btnDeletd}>Deleted</button> : ""}
-  {isAdming ? <Link className={style.btnLink} href="/dashboard">Editar</Link> : ""}
+
+  {isAdming ? <Link className={style.btnLink} href={`/blogs/${propetario}/admin/blog/${id}`}>Editar</Link> : ""}
   </div>
   
   </>;

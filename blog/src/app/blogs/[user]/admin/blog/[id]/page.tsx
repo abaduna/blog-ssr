@@ -4,6 +4,7 @@ import { blogProps } from "@/app/blogs/[user]/page";
 import { jwtDecode } from "jwt-decode";
 import React, { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 interface paramsProps {
   params: {
     id: string
@@ -22,11 +23,14 @@ const Page = ({ params }: paramsProps) => {
   const router = useRouter();
   useEffect(() => {
     const getBlog = async () => {
+      
       const blogres = await fetch(
         `http://localhost:3001/api/blogs/blog/${params.id}`
       );
 
       const data = await blogres.json();
+      console.log(data);
+      
       setBlog(data);
     };
     getBlog();
@@ -70,6 +74,20 @@ const Page = ({ params }: paramsProps) => {
       }
     }
   }, []);
+  const DeletedBlog =()=>{
+    
+    fetch(`http://localhost:3001/api/blogs/blog/${params.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    router.push("/");
+
+  }
   return (
     <div className={styles.container}>
     <form onSubmit={update}>
@@ -93,7 +111,10 @@ const Page = ({ params }: paramsProps) => {
         />
       </div>
       <button className={styles.submitbutton}>Actualizar</button>
+      
     </form>
+    <br/>
+    <button className={styles.delete} onClick={DeletedBlog}>Eliminar</button>
   </div>
   );
 };

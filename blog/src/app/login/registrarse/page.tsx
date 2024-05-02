@@ -2,18 +2,16 @@
 
 import styles from "./styles.module.css"
 import { revalidatePath } from "next/cache"
-import { useRouter } from 'next/navigation'
-
 import { FormEvent, useState } from "react"
-import action from "@/./action/cache"
-
+import actionPath from "../../../action/cache"
+import { useRouter } from "next/navigation"
 export interface UserProps  {
-    name:string
+  user:string
     password:string
 }
 async function loginPost(user:UserProps) {
-  action
-  const rest = await fetch("http://localhost:3001/api/login/", {
+  actionPath
+  const rest = await fetch("http://localhost:3001/api/login/created", {
     method: "post",
     headers: {
       Accept: "application/json",
@@ -32,17 +30,16 @@ function Page() {
   const router = useRouter()
     const handlerLogin =async (e: FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
-        const data:UserProps = {
-          name:user,
+        const dataProps:UserProps = {
+          user,
           password
         }
         try {
-         const token = await loginPost(data)
-         
-         console.log(token);
+         const token = await loginPost(dataProps)
+
          
          if (token) {
-          console.log(token);
+
           
           localStorage.setItem("token", token.token);
           router.push(`/blogs/${user}`)
@@ -58,6 +55,7 @@ function Page() {
     }
   return (
     <div className={styles.formContainer}>
+      <h1>Registrate</h1>
         <form onSubmit={handlerLogin}>
             <input placeholder="usuario" onChange={e=>setUser(e.target.value)}/>
             <input placeholder="contraseña" type="password" onChange={e=>setPassword(e.target.value)}/>

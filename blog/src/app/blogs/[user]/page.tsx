@@ -2,6 +2,7 @@
 import UpdateSPA from "@/component/Modificar/updateSPA";
 
 import styles from "./list.module.css"
+import { revalidatePath } from "next/cache";
 
 interface paramsProps {
     params: {
@@ -17,6 +18,7 @@ export interface blogProps {
   
 }
 async function getBlogs (user:string) {
+  revalidatePath(`/blogs/${user}`)
     const res = await fetch(`http://localhost:3001/api/blogs/usuario/${user}`)
     const data = await res.json()
     return data
@@ -35,7 +37,7 @@ const Page = async({params}:paramsProps) => {
           <p className={styles.blogtitle}>{blog.title}</p>
           <p className={styles.blogcontent}>{blog.blog}</p>
           
-          <UpdateSPA propetario={params.user} id={blog.id}/>
+          <UpdateSPA propetario={params.user}  id={blog.id}/>
         </div>
       ))}
     </div>

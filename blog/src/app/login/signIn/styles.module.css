@@ -1,0 +1,40 @@
+/* Estilos para el contenedor del formulario */
+.formContainer {
+    max-width: 400px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario en la página */
+    padding: 20px; /* Espaciado interno */
+    background-color: #f5f5f5; /* Color de fondo */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+
+/* Estilos para el formulario */
+.formContainer form {
+    display: flex;
+    flex-direction: column; /* Organiza elementos en una columna */
+}
+
+/* Estilos para los campos de entrada (input) */
+.formContainer input {
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espaciado entre campos */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Estilos para el botón */
+.formContainer button {
+    padding: 10px; /* Espaciado interno */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+/* Efecto hover para el botón */
+.formContainer button:hover {
+    background-color: #0056b3; /* Cambia el color al pasar el mouse */
+}
