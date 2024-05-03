@@ -16,6 +16,7 @@ const UpdateSPA = ({ propetario,id }: btnDeletd) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+     try {
       const result:resultProps = jwtDecode(token);
       console.log(result.user);
       console.log(propetario);
@@ -24,6 +25,12 @@ const UpdateSPA = ({ propetario,id }: btnDeletd) => {
         
         setIsAdming(true);
       }
+     } catch (error) {
+      console.error(error);
+      
+     } 
+    }else {
+      setIsAdming(false);
     }
   }, []);
   

@@ -1,0 +1,39 @@
+/* PostForm.module.css */
+
+/* Estilo general para el formulario */
+.formContainer {
+    padding: 20px;
+    background-color: #f0f0f0; /* Fondo claro */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    max-width: 400px;
+    margin: 0 auto; /* Centrar el formulario */
+  }
+  
+  /* Estilo para los campos de entrada (input) */
+  .inputField {
+    width: 100%; /* Ocupa todo el ancho */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espaciado entre campos */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+  }
+  
+  /* Estilo para el botón de envío */
+  .submitButton {
+    background-color: #3498db; /* Azul brillante */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor a mano */
+    transition: background-color 0.3s; /* Transición para hover */
+  }
+  
+  /* Cambios en hover para el botón */
+  .submitButton:hover {
+    background-color: #2980b9; /* Azul más oscuro en hover */
+  }
+  

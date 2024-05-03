@@ -1,0 +1,29 @@
+/* NavBar.module.css */
+.navContainer {
+    background-color: #333; /* Color de fondo para el navbar */
+    padding: 10px; /* Espaciado interno */
+  }
+  
+  .navList {
+    list-style: none; /* Eliminar los marcadores de lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Alinear elementos horizontalmente */
+    justify-content: flex-start; /* Alinear hacia la izquierda */
+  }
+  
+  .navItem {
+    margin-right: 15px; /* Espaciado entre elementos de la lista */
+  }
+  
+  .navLink {
+    text-decoration: none; /* Eliminar el subrayado */
+    color: white; /* Color del texto */
+    font-weight: bold;
+    transition: color 0.3s; /* Transición para el hover */
+  }
+  
+  .navLink:hover {
+    color: #3498db; /* Color en estado de hover */
+  }
+  

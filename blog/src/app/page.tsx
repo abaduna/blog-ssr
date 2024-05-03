@@ -1,6 +1,7 @@
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-
+import styles from "./page.module.css"
+import Navbar from "@/component/navbar/Navbar";
 interface user {
   user:string
 }
@@ -19,13 +20,13 @@ export default async function Home() {
   console.log(data);
   return (
     <div>
-      
-      {data && data.length > 0 && data.map((user,i)=>(
-        <div key={i}>
-          <Link  href={`/blogs/${user}`}>{` el blog de ${user}`}</Link>
+      <Navbar/>
+      {data.map((user, i) => (
+        <div key={i} className={styles.blogLinkContainer}> 
+          <Link className={styles.blogLink} href={`/blogs/${user}`}>
+           {user}
+          </Link>
         </div>
-
-        
       ))}
     </div>
   );

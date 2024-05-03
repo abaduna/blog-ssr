@@ -8,7 +8,7 @@ import { FormEvent, useState } from "react"
 import action from "@/./action/cache"
 
 export interface UserProps  {
-    name:string
+  user:string
     password:string
 }
 async function loginPost(user:UserProps) {
@@ -33,7 +33,7 @@ function Page() {
     const handlerLogin =async (e: FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         const data:UserProps = {
-          name:user,
+          user,
           password
         }
         try {
@@ -41,14 +41,10 @@ function Page() {
          
          console.log(token);
          
-         if (token) {
-          console.log(token);
-          
+      
           localStorage.setItem("token", token.token);
           router.push(`/blogs/${user}`)
-        } else {
-          console.log('El token es indefinido.');
-        }
+       
          
         } catch (error) {
           console.log(error);
@@ -58,6 +54,7 @@ function Page() {
     }
   return (
     <div className={styles.formContainer}>
+      <h1>Iniciar secion</h1>
         <form onSubmit={handlerLogin}>
             <input placeholder="usuario" onChange={e=>setUser(e.target.value)}/>
             <input placeholder="contraseña" type="password" onChange={e=>setPassword(e.target.value)}/>

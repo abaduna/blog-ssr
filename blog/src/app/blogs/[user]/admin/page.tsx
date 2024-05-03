@@ -1,6 +1,8 @@
 "use client"
+import styles from "./admin.module.css"
 import { blogProps } from "../page";
 import React, { FormEvent, useState } from 'react';
+import actionPath from "@/action/cache";
 interface paramsProps {
   params: {
     id: string;
@@ -32,7 +34,9 @@ function Page({ params }: paramsProps) {
     blog:blogState,
     title:titleState
   };
+  actionPath()
        postBlog(blog); 
+       
     } catch (error) {
         console.log(error);
         
@@ -40,11 +44,23 @@ function Page({ params }: paramsProps) {
    }
   return (
     <>
-      <form onSubmit={(e)=>handlerPost(e)}>
-      <input type="text" placeholder="title del post" onChange={e=> setTitleState(e.target.value)}/>
-      <input type="text" placeholder="descripcion del post" onChange={e=> setBlog(e.target.value)}/>
-      <button type="submit">Enviar</button>
-      </form>
+      <form onSubmit={(e) => handlerPost(e)} className={styles.formContainer}>
+      <input
+        type="text"
+        placeholder="Título del post"
+        onChange={(e) => setTitleState(e.target.value)}
+        className={styles.inputField}
+      />
+      <input
+        type="text"
+        placeholder="Descripción del post"
+        onChange={(e) => setBlog(e.target.value)}
+        className={styles.inputField}
+      />
+      <button type="submit" className={styles.submitButton}>
+        Enviar
+      </button>
+    </form>
     </>
   );
 }

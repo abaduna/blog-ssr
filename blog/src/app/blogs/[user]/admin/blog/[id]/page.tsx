@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import React, { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import actionPath from "@/action/cache";
 interface paramsProps {
   params: {
     id: string
@@ -62,6 +63,8 @@ const Page = ({ params }: paramsProps) => {
         body: JSON.stringify(data),
       }
     );
+    actionPath
+    router.push("/");
   };
   useEffect(() => {
     const token = localStorage.getItem("token");
